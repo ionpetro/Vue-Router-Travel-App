@@ -7,31 +7,16 @@ Vue.use(VueRouter);
 
 
 export default new Router({
-  mode: 'history',
   routes: [{
       path: '/',
       name: 'home',
       component: Home
     },
     {
-      path: '/brazil',
-      name: 'brazil',
-      component: () => import( /* webpackChunkName: "brazil" */ './views/Brazil')
-    },
-    {
-      path: '/hawaii',
-      name: 'hawaii',
-      component: () => import( /* webpackChunkName: "hawaii" */ './views/Hawaii')
-    },
-    {
-      path: '/panama',
-      name: 'panama',
-      component: () => import( /* webpackChunkName: "panama" */ './views/Panama')
-    },
-    {
-      path: '/jamaica',
-      name: 'jamaica',
-      component: () => import( /* webpackChunkName: "jamaica" */ './views/Jamaica')
+      path: 'details/:id',
+      name: 'DestinationDetails',
+      component: () =>
+        import( /* webpackChunkName: "destinationDetails" */ './views/DestinationDetails')
 
     }
   ]
