@@ -1,5 +1,6 @@
 <template>
   <div>
+    <GoBack />
     <!-- Destination -->
     <section class="destination">
       <h1>{{ destination.name }}</h1>
@@ -15,7 +16,7 @@
     <!-- Destination Experiences -->
     <section class="experiences">
       <h2>Top experiences in {{ destination.name }}</h2>
-      <div class="cards">
+      <div class="cards" id="experience">
         <div
           v-for="experience in destination.experiences"
           :key="experience.name"
@@ -25,6 +26,7 @@
             :to="{
               name: 'experienceDetails',
               params: { experienceSlug: experience.slug },
+              hash: '#experience',
             }"
           >
             <img
@@ -42,7 +44,11 @@
 
 <script>
 import store from "../store.js";
+import GoBack from "../components/GoBack";
 export default {
+  components: {
+    GoBack,
+  },
   data() {
     return {};
   },
