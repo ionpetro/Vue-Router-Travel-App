@@ -7,7 +7,7 @@ import store from './store.js'
 Vue.use(VueRouter);
 
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
@@ -63,10 +63,41 @@ export default new Router({
 
     },
     {
+      path: '/user',
+      name: 'user',
+      component: () => import('./views/User'),
+      // use meta property to protect my route
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./views/Login')
+    },
+    {
       path: '404',
       alias: '*',
       name: 'NotFound',
-      component: () => import('./views/NotFound')
+      component: () => import('./views/NotFound'),
+
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.user) {
+      next({
+        name: 'login'
+      })
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;
