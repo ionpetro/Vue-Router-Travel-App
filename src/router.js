@@ -7,14 +7,17 @@ Vue.use(VueRouter);
 
 
 export default new Router({
+  mode: 'history',
   routes: [{
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      props: true
     },
     {
-      path: 'details/:id',
+      path: '/details/:slug',
       name: 'DestinationDetails',
+      props: true,
       component: () =>
         import( /* webpackChunkName: "destinationDetails" */ './views/DestinationDetails')
 

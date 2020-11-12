@@ -15,14 +15,18 @@
 import store from "../store.js";
 export default {
   data() {
-    return {
-      destinationId: this.$route.params.id,
-    };
+    return {};
+  },
+  props: {
+    slug: {
+      type: String,
+      required: true,
+    },
   },
   computed: {
     destination() {
       return store.destinations.find(
-        (destination) => this.destinationId === destination.id
+        (destination) => this.slug === destination.slug
       );
     },
   },
